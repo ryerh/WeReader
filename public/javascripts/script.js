@@ -12,7 +12,7 @@ var accessTokenUrl = [
 $.ajax({
   url: accessTokenUrl,
   type: 'GET',
-  datatype: 'jsonp',
+  dataType: 'jsonp',
   success: function(accessToken) {
     alert(accessToken);
   }
