@@ -2,4 +2,23 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  h1: a(href="#") 获取 Access Token
+
+block script.
+  var appid = 'wx37009e136e4b43ae';
+  var secrect = '2897d54cf9cf571f9ff6efe3317cbfa5';
+  var accessTokenUrl = [
+    'https://api.weixin.qq.com/cgi-bin/token',
+    '?grant_type=client_credential',
+    '&appid=', appid,
+    '&secret=', secrect
+  ].join('');
+
+  $.ajax({
+    url: accessTokenUrl,
+    type: 'GET',
+    datatype: 'jsonp',
+    success: function(accessToken) {
+      alert(accessToken);
+    }
+  });
