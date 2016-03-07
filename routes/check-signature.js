@@ -15,11 +15,12 @@ const checkSignature = (signature, timestamp, nonce, token) => {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  const s = req.query.signature;
-  const ts = req.query.timestamp;
-  const n = req.query.nonce;
-  const isMatch = checkSignature(s, ts, n, TOKEN);
-  res.send(isMatch ? s : '');
+  const signature = req.query.signature;
+  const timestamp = req.query.timestamp;
+  const nonce = req.query.nonce;
+  const echostr = req.query.echostr;
+  const isMatch = checkSignature(signature, timestamp, nonce, TOKEN);
+  res.send(isMatch ? echostr : '');
 });
 
 module.exports = router;
