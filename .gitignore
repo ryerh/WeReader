@@ -6,6 +6,7 @@
 dist
 
 .idea/
+.vscode/
 backup/
 dev/
 node_modules/

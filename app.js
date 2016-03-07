@@ -7,10 +7,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var checkSignature = require('./routes/check-signature');
 
 var app = express();
 
-// view engine setup
+// 视图存放位置和模板引擎
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -22,8 +23,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 路由
 app.use('/', routes);
 app.use('/users', users);
+app.use('/check-signature', checkSignature);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -32,10 +35,10 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
+// 异常处理
 
-// development error handler
-// will print stacktrace
+// 开发环境错误回调
+// 输出错误调用栈
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -46,8 +49,8 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+// 生产环境错误回调
+// 用户看不到错误调用栈
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
