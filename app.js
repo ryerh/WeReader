@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 路由
 app.use('/', routes);
-app.ues('/auth', auth);
+app.use('/auth', auth);
 app.use('/check-signature', checkSignature);
 app.use('/users', users);
 
