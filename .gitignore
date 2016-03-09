@@ -1,20 +1,11 @@
-
+# 文件
 .DS_Store
 *.log
-*.iml
 *.cache
-dist
+config.json
 
+# 目录
 .idea/
 .vscode/
 backup/
-dev/
 node_modules/
-UI/
-vendor/
-
-scss/*.css
-scss/*.map
-scss/test*
-jade/test*
-jsx/test*
