@@ -10,6 +10,7 @@ const routes = require('./routes/index');
 const auth = require('./routes/auth');
 const checkSignature = require('./routes/check-signature');
 const echo = require('./routes/echo');
+const jsconfig = require('./routes/jsconfig');
 const token = require('./routes/token');
 const users = require('./routes/users');
 
@@ -32,6 +33,7 @@ app.use('/', routes);
 app.use('/auth', auth);
 app.use('/check-signature', checkSignature);
 app.use('/echo', echo);
+app.use('/jsconfig', jsconfig);
 app.use('/token', token);
 app.use('/users', users);
 

@@ -1,12 +1,12 @@
 const request = require('../lib/request');
 
-const uri = 'http://localhost:3000/echo?q=11';
+const uri = 'http://localhost:3000/echo';
 const data = {
   param: 'urlparam'
 };
 
 request
-  .post(uri, data)
+  .get(uri)
   .then(data => {
     console.log('data = ', data);
   });

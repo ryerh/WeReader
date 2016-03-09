@@ -15,7 +15,3 @@ quote_type = single
 curly_bracket_next_line = false
 spaces_around_operators = true
 continuation_indent_size = 2
-
-[{*.md,*.json}]
-indent_style = space
-indent_size = 4
