@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const express = require('express');
+const request = require('../lib/request');
 const router = express.Router();
 
 // 微信 JS-SDK 使用权限签名算法

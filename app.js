@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const auth = require('./routes/auth');
 const checkSignature = require('./routes/check-signature');
+const token = require('.//routes/token');
 const users = require('./routes/users');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/auth', auth);
 app.use('/check-signature', checkSignature);
+app.use('/token', token);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
