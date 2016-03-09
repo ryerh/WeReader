@@ -1,5 +1,8 @@
 {
   "appid": "wx37009e136e4b43ae",
-  "secrect": "2897d54cf9cf571f9ff6efe3317cbfa5",
-  "site": "http://localhost:3000"
+  "secret": "2897d54cf9cf571f9ff6efe3317cbfa5",
+  "site": "http://localhost:3000",
+  "token_value": "oI41oJcjpTM92BBmPWisjHa79gTu_zx1OZ7AzWYs-kjC9ObU07ML-jb7UU6Z7OHJ18ZMHv8rbuQZZm7o2nG5vOPiS69FUSzSpA1oSqq4PEePAQfH6UWzG2DZPtQ2eTv-ACWaACAQSM",
+  "token_ts": 1457535898,
+  "token_expire": 7200
 }

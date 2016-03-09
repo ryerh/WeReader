@@ -1,12 +1,5 @@
-const request = require('../lib/request');
+const cache = require('../lib/cache');
 
-const uri = 'http://localhost:3000/echo';
-const data = {
-  param: 'urlparam'
-};
-
-request
-  .get(uri)
-  .then(data => {
-    console.log('data = ', data);
-  });
+cache.del('k');
+cache.save();
+console.log(cache.get());

@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const cache = require('../lib/cache');
 const crypto = require('crypto');
 const express = require('express');
 const request = require('../lib/request');
@@ -6,7 +6,7 @@ const router = express.Router();
 
 // 调用本地 /token 接口获取 Access Token
 const getAccessToken = () => {
-  return request.get(`${config.site}/token`);
+  return request.get(`${cache.get('site')}/token`);
 };
 
 // 获取 JS Ticket
@@ -36,7 +36,7 @@ const generateConfig = (ticket, url) => {
   const signature = sha1.digest('hex');
 
   return Promise.resolve({
-    appid: config.appid,
+    appid: cache.get('appid'),
     signature: signature,
     noncestr: nonceStr,
     timestamp: timestamp,
