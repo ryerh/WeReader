@@ -11,8 +11,8 @@ const getAccessToken = () => {
   const tokenTimestamp = cache.get('token_ts');
   const tokenExpire = cache.get('token_expire');
   const currentTimestamp = Math.floor((new Date()).getTime() / 1000);
-  console.log(tokenValue, currentTimestamp - tokenTimestamp, tokenExpire);
   if(tokenValue && currentTimestamp - tokenTimestamp < tokenExpire) {
+    console.log('从缓存中获取 Access Token', tokenValue);
     return Promise.resolve({
       access_token: tokenValue,
       expires_in: tokenExpire,
@@ -36,6 +36,7 @@ router.get('/', function(req, res, next) {
       const token = typeof data === 'string' ? JSON.parse(data) : data;
       res.send(token);
       if(token.source !== 'from_cache') {
+        console.log('写入新的 Access Token 到缓存', token.access_token);
         const currentTimestamp = Math.floor((new Date()).getTime() / 1000);
         cache.set('token_value', token.access_token);
         cache.set('token_ts', currentTimestamp);

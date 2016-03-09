@@ -22,6 +22,7 @@ const getTicket = token => {
 
 // 生成 JSSDK config 信息
 const generateConfig = (ticket, url) => {
+  console.log('取得 JSSDK Ticket', ticket);
   const nonceStr = crypto.randomBytes(8).toString('hex');
   const timestamp = Math.floor((new Date()).getTime() / 1000);
   const tempStr = [
@@ -54,7 +55,7 @@ router.get('/', function(req, res, next) {
     .then(res => getTicket(JSON.parse(res)))
     .then(res => generateConfig(JSON.parse(res), url))
     .then(config => res.send(config))
-    .then(err => res.send({
+    .catch(err => res.send({
       status: 500,
       msg: err.toString()
     }));
