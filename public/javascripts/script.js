@@ -1,19 +1,53 @@
-// config
-var appid = 'wx37009e136e4b43ae';
-var secrect = '2897d54cf9cf571f9ff6efe3317cbfa5';
-var accessTokenUrl = [
-  'https://api.weixin.qq.com/cgi-bin/token',
-  '?grant_type=client_credential',
-  '&appid=', appid,
-  '&secret=', secrect
-].join('');
+var apiList = [
+  'onMenuShareTimeline',
+  'onMenuShareAppMessage',
+  'onMenuShareQQ',
+  'onMenuShareWeibo',
+  'onMenuShareQZone',
+  'startRecord',
+  'stopRecord',
+  'onVoiceRecordEnd',
+  'playVoice',
+  'pauseVoice',
+  'stopVoice',
+  'onVoicePlayEnd',
+  'uploadVoice',
+  'downloadVoice',
+  'chooseImage',
+  'previewImage',
+  'uploadImage',
+  'downloadImage',
+  'translateVoice',
+  'getNetworkType',
+  'openLocation',
+  'getLocation',
+  'hideOptionMenu',
+  'showOptionMenu',
+  'hideMenuItems',
+  'showMenuItems',
+  'hideAllNonBaseMenuItem',
+  'showAllNonBaseMenuItem',
+  'closeWindow',
+  'scanQRCode',
+  'chooseWXPay',
+  'openProductSpecificView',
+  'addCard',
+  'chooseCard',
+  'openCard'
+];
 
-// get access token
+// 获取
 $.ajax({
-  url: accessTokenUrl,
+  url: '/jsconfig',
   type: 'GET',
-  dataType: 'jsonp',
-  success: function(accessToken) {
-    alert(accessToken);
+  success: function(config) {
+    wx.config({
+      debug: true,
+      appId: config.appid,
+      timestamp: config.timestamp,
+      nonceStr: config.noncestr,
+      signature: config.signature,
+      jsApiList: apiList
+    });
   }
 });
