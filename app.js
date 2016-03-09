@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const auth = require('./routes/auth');
 const checkSignature = require('./routes/check-signature');
-const token = require('.//routes/token');
+const echo = require('./routes/echo');
+const token = require('./routes/token');
 const users = require('./routes/users');
 
 const app = express();
@@ -18,7 +19,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+// 把收藏夹图标放在 /public 目录后注释掉下面这一行
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/auth', auth);
 app.use('/check-signature', checkSignature);
+app.use('/echo', echo);
 app.use('/token', token);
 app.use('/users', users);
 
@@ -63,6 +65,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
