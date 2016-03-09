@@ -35,7 +35,7 @@ const generateConfig = (ticket, url) => {
   const sha1 = crypto.createHash('sha1');
   sha1.update(tempStr);
   const signature = sha1.digest('hex');
-
+  console.log('加密后的 Signature', signature);
   return Promise.resolve({
     appId: cache.get('appid'),
     signature: signature,
