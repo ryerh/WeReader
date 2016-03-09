@@ -31,15 +31,15 @@ const generateConfig = (ticket, url) => {
     `timestamp=${timestamp}`,
     `url=${url}`
   ].join('&');
-
+  console.log('Signature 加密前拼接字符串', tempStr);
   const sha1 = crypto.createHash('sha1');
   sha1.update(tempStr);
   const signature = sha1.digest('hex');
 
   return Promise.resolve({
-    appid: cache.get('appid'),
+    appId: cache.get('appid'),
     signature: signature,
-    noncestr: nonceStr,
+    nonceStr: nonceStr,
     timestamp: timestamp,
     comment: 'This appid is test account.'
   });

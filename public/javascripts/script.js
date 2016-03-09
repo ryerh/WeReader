@@ -43,9 +43,9 @@ $.ajax({
   success: function(config) {
     wx.config({
       debug: true,
-      appId: config.appid,
+      appId: config.appId,
       timestamp: config.timestamp,
-      nonceStr: config.noncestr,
+      nonceStr: config.nonceStr,
       signature: config.signature,
       jsApiList: apiList
     });
