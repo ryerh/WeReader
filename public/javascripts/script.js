@@ -52,6 +52,15 @@ $.ajax({
       signature: config.signature,
       jsApiList: apiList
     });
+
+    wx.config({
+      debug: true,
+      appId: config.appId,
+      timestamp: config.timestamp,
+      nonceStr: config.nonceStr,
+      signature: config.signature,
+      jsApiList: apiList
+    });
   }
 });
 
@@ -59,7 +68,7 @@ wx.ready(function() {
   console.log('wechat is ready');
 
   wx.checkJsApi({
-    jsApiList: apiList, // 需要检测的JS接口列表，所有JS接口列表见附录2,
+    jsApiList: ['onMenuShareTimeline'],
     success: function(res) {
       console.log('check result', res);
     }
