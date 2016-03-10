@@ -38,7 +38,7 @@ var apiList = [
 
 // 获取
 $.ajax({
-  url: '/jsconfig',
+  url: '/config',
   type: 'GET',
   data: {
     url: location.href.split('#')[0]
