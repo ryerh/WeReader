@@ -40,6 +40,9 @@ var apiList = [
 $.ajax({
   url: '/jsconfig',
   type: 'GET',
+  data: {
+    url: location.href.split('#')[0]
+  },
   success: function(config) {
     wx.config({
       debug: true,

@@ -8,9 +8,10 @@ const bodyParser = require('body-parser');
 // 路由
 const routes = require('./routes/index');
 const auth = require('./routes/auth');
-const checkSignature = require('./routes/check-signature');
+const config = require('./routes/config');
 const echo = require('./routes/echo');
-const jsconfig = require('./routes/jsconfig');
+const signature = require('./routes/signature');
+const ticket = require('./routes/ticket');
 const token = require('./routes/token');
 const users = require('./routes/users');
 
@@ -31,10 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 路由
 app.use('/', routes);
 app.use('/auth', auth);
-app.use('/check-signature', checkSignature);
+app.use('/config', config);
 app.use('/echo', echo);
-app.use('/jsconfig', jsconfig);
+app.use('/signature', signature);
 app.use('/token', token);
+app.use('/ticket', ticket);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
