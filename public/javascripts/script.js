@@ -54,3 +54,18 @@ $.ajax({
     });
   }
 });
+
+wx.ready(function() {
+  console.log('wechat is ready');
+
+  wx.checkJsApi({
+    jsApiList: apiList, // 需要检测的JS接口列表，所有JS接口列表见附录2,
+    success: function(res) {
+      console.log('check result', res);
+    }
+  });
+});
+
+wx.error(function(err) {
+  console.log('wechat config fail', err);
+});
