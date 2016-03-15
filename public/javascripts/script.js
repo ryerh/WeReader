@@ -52,26 +52,13 @@ $.ajax({
       signature: config.signature,
       jsApiList: apiList
     });
-
-    wx.config({
-      debug: true,
-      appId: config.appId,
-      timestamp: config.timestamp,
-      nonceStr: config.nonceStr,
-      signature: config.signature,
-      jsApiList: apiList
-    });
   }
 });
 
 wx.ready(function() {
   console.log('wechat is ready');
-
-  wx.checkJsApi({
-    jsApiList: ['onMenuShareTimeline'],
-    success: function(res) {
-      console.log('check result', res);
-    }
+  wx.onMenuShareTimeline({
+    title: '你好'
   });
 });
 
