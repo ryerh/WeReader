@@ -8,7 +8,7 @@ const router = express.Router();
 // 调用本地 /token 接口获取 Access Token
 // @returns {Promise} - 获取到的 token
 const getAccessToken = () => {
-  return request.get(`${cache.get('site')}/token`);
+  return request.get(`${cache.get('site')}/api/token`);
 };
 
 // 获取 JS Ticket

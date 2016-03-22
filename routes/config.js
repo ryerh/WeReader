@@ -9,7 +9,7 @@ const router = express.Router();
 // 调用本地 /token 接口获取 JSSDK Ticket
 // @returns {Promise} - 获取到的 ticket
 const getTicket = () => {
-  return request.get(`${cache.get('site')}/ticket`);
+  return request.get(`${cache.get('site')}/api/ticket`);
 };
 
 // 生成 JSSDK config 信息
