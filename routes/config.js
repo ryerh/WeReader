@@ -51,7 +51,14 @@ const generateConfig = (ticket, url) => {
 router.get('/', (req, res, next) => {
   getTicket()
     .then(data => generateConfig(JSON.parse(data), req.query.url))
-    .then(data => res.send(data))
+    .then(data => {
+      const jsonpCb = req.query.callback;
+      if(jsonpCb) {
+        res.send(`jsonpCb(${JSON.stringify(data)})`);
+      } else {
+        res.send(data);
+      }
+    })
     .catch(err => res.send({
       status: 500,
       msg: err.toString()
