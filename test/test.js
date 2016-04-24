@@ -1,5 +1,3 @@
-const cache = require('../lib/cache');
+const { name } = { name: 123 }
 
-cache.del('k');
-cache.save();
-console.log(cache.get());
+console.log(name)

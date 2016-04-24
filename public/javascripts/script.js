@@ -1,40 +1,6 @@
-var apiList = [
-  'onMenuShareTimeline',
-  'onMenuShareAppMessage',
-  'onMenuShareQQ',
-  'onMenuShareWeibo',
-  'onMenuShareQZone',
-  'startRecord',
-  'stopRecord',
-  'onVoiceRecordEnd',
-  'playVoice',
-  'pauseVoice',
-  'stopVoice',
-  'onVoicePlayEnd',
-  'uploadVoice',
-  'downloadVoice',
-  'chooseImage',
-  'previewImage',
-  'uploadImage',
-  'downloadImage',
-  'translateVoice',
-  'getNetworkType',
-  'openLocation',
-  'getLocation',
-  'hideOptionMenu',
-  'showOptionMenu',
-  'hideMenuItems',
-  'showMenuItems',
-  'hideAllNonBaseMenuItem',
-  'showAllNonBaseMenuItem',
-  'closeWindow',
-  'scanQRCode',
-  'chooseWXPay',
-  'openProductSpecificView',
-  'addCard',
-  'chooseCard',
-  'openCard'
-];
+var jsApiList = [
+  'scanQRCode'
+]
 
 // 获取
 $.ajax({
@@ -43,25 +9,25 @@ $.ajax({
   data: {
     url: location.href.split('#')[0]
   },
-  success: function(config) {
+  success: function (config) {
     wx.config({
       debug: true,
       appId: config.appId,
       timestamp: config.timestamp,
       nonceStr: config.nonceStr,
       signature: config.signature,
-      jsApiList: apiList
-    });
+      jsApiList: jsApiList
+    })
   }
-});
+})
 
-wx.ready(function() {
-  console.log('wechat is ready');
+wx.ready(function () {
+  console.log('wechat is ready')
   wx.onMenuShareTimeline({
     title: '你好'
-  });
-});
+  })
+})
 
-wx.error(function(err) {
-  console.log('wechat config fail', err);
-});
+wx.error(function (err) {
+  console.log('wechat config fail', err)
+})
