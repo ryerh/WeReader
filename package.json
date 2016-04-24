@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "node-es6": "node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs)",
-    "start": "node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./bin/www",
-    "test": "node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./lib/request"
+    "start": "node-es6 ./bin/www",
+    "test": "node-es6 ./lib/request"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
