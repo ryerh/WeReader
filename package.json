@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=express:* node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./bin/www",
+    "dev": "DEBUG=express:* node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./bin/www",
+    "start": "DEBUG=express:* nodemon --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./bin/www",
     "test": "node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./test/test"
   },
   "dependencies": {
