@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "node-es6": "node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs)",
-    "start": "node-es6 ./bin/www",
-    "test": "node-es6 ./lib/request"
+    "start": "DEBUG=express:* node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./bin/www",
+    "test": "node --use-strict $(node --v8-options | grep harm | awk '{print $1}' | xargs) ./test/test"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
