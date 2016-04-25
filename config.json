@@ -1,0 +1,15 @@
+{
+  "app": {
+    "appid": "wx37009e136e4b43ae",
+    "secret": "2897d54cf9cf571f9ff6efe3317cbfa5",
+    "token": "ryerh"
+  },
+  "accessToken": {
+    "expire": 7200,
+    "timestamp": 1461551238,
+    "value": "hzVj0Lg-UvvvU7mXqljnF9jQgdjCMPs5F8gHwIQSy4RpNHOWc8rCTzF22-UsV2kAAdQYDkCgNjR8P-mJivZbV9JfyWV9Tt2Ko64DT8R5MDpv-zSC3n7Uof-CpaFkSvU3OFSaAAAIZM"
+  },
+  "jsTicket": {
+    "timestamp": 1461553180
+  }
+}

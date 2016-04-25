@@ -2,7 +2,6 @@
 .DS_Store
 *.log
 *.cache
-config.json
 
 # 目录
 .idea/
