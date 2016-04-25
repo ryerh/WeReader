@@ -11,7 +11,7 @@ $.ajax({
   },
   success: function (config) {
     wx.config({
-      debug: true,
+      debug: false,
       appId: config.appid,
       timestamp: config.timestamp,
       nonceStr: config.nonceStr,
