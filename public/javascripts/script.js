@@ -31,3 +31,16 @@ wx.ready(function () {
 wx.error(function (err) {
   console.log('wechat config fail', err)
 })
+
+$(function () {
+  $('#scan-code').on('click', function () {
+    wx.scanQRCode({
+      needResult: 0,
+      scanType: ['qrCode', 'barCode'],
+      success: function (res) {
+        var result = res.resultStr
+        console.log(result)
+      }
+    })
+  })
+})
