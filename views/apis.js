@@ -39,7 +39,7 @@ router.get('/signature', (req, res) => {
 router.get('/config', (req, res) => {
   const { url } = req.query
   weutils.generateConfig(url)
-    .then(res.send)
+    .then(data => res.send(data))
     .catch(err => res.send({
       status: 500,
       msg: err.toString()

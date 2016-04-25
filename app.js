@@ -22,9 +22,6 @@ const APP_ROOT = __dirname
 
 const app = express()
 
-// 代理设置
-app.set('trust proxy', 'loopback')
-
 // 视图存放位置和模板引擎
 app.set('views', path.join(APP_ROOT, 'templates'))
 app.set('view engine', 'jade')
@@ -40,6 +37,9 @@ app.use(express.static(path.join(APP_ROOT, 'public')))
 // 路由
 app.use('/', site)
 app.use('/api', apis)
+
+// 代理设置
+app.set('trust proxy', 'loopback')
 
 // proxy api requests
 _.map(proxyMap, (context, options) => {
