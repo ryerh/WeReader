@@ -51,6 +51,7 @@ router.get('/book/:isbn', (req, res) => {
     .then(data => {
       const book = json.parse(data)
       console.log('获取书籍', book)
+      book.title = book.title || `Book not found (${isbn})`
       res.send(book)
     })
 })
