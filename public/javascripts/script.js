@@ -12,7 +12,7 @@ $.ajax({
   success: function (config) {
     wx.config({
       debug: true,
-      appId: config.appId,
+      appId: config.appid,
       timestamp: config.timestamp,
       nonceStr: config.nonceStr,
       signature: config.signature,
