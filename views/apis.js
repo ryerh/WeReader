@@ -48,7 +48,11 @@ router.get('/config', (req, res) => {
 router.get('/book/:isbn', (req, res) => {
   const { isbn } = req.params
   request.get(`https://api.douban.com/v2/book/isbn/${isbn}`)
-    .then(data => res.send(json.parse(data)))
+    .then(data => {
+      const book = json.parse(data)
+      console.log('获取书籍', book)
+      res.send(book)
+    })
 })
 
 module.exports = router
