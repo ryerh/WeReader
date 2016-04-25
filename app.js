@@ -7,7 +7,7 @@ const cookieParser    = require('cookie-parser')
 const bodyParser      = require('body-parser')
 const proxyMiddleware = require('http-proxy-middleware')
 
-// 路由 & 视图
+// 绑定视图的路由
 const apis            = require('./views/apis')
 const site            = require('./views/site')
 

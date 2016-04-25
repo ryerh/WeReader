@@ -26,70 +26,20 @@ router.get('/auth', (req, res) => {
   `)
 })
 
-// 生成 JSSDK 配置信息
+router.get('/signature', (req, res) => {
+  const { signature, timestamp, nonce, echostr } = req.query
+  weutils.checkSignature(signature, timestamp, nonce)
+    .then(data => res.send(echostr))
+    .catch(err => res.send('signature invalid'))
+})
 
 // 微信 JS-SDK 使用权限签名算法
 // 参考微信示例（附录一）：
 // @url http://mp.weixin.qq.com/wiki/11/74ad127cc054f6b80759c40f77ec03db.html
 router.get('/config', (req, res) => {
-  weutils.getTicket()
-    .then(data => weutils.generateConfig(JSON.parse(data), req.query.url))
-    .then(data => res.send(data))
-    .catch(err => res.send({
-      status: 500,
-      msg: err.toString()
-    }))
-})
-
-router.get('/signature', (req, res) => {
-  const { signature, timestamp, nonce, echostr } = req.query
-  const isMatch = weutils.checkSignature(signature, timestamp, nonce)
-  res.send(isMatch ? echostr : 'signature invalid')
-})
-
-// 微信 JS-SDK 使用权限签名算法
-// 参考微信示例（附录一）：
-// @url http://mp.weixin.qq.com/wiki/11/74ad127cc054f6b80759c40f77ec03db.html
-router.get('/ticket', (req, res) => {
-  weutils.getAccessToken()
-    .then(data => weutils.getTicket(JSON.parse(data)))
-    .then(data => {
-      // 发送 JSSDK Ticket 到客户端
-      res.send(data)
-      // 缓存操作
-      const ticket = typeof data === 'string' ? JSON.parse(data) : data
-      const currentTimestamp = Math.floor((new Date()).getTime() / 1000)
-      if(ticket.source !== 'from_cache') {
-        console.log('写入新的 JSSDK Ticket 到缓存', ticket.ticket)
-        cache.set('ticket_value', ticket.ticket)
-        cache.set('ticket_expire', ticket.expires_in)
-        cache.set('ticket_ts', currentTimestamp)
-        cache.save()
-      }
-    })
-    .catch(err => res.send({
-      status: 500,
-      msg: err.toString()
-    }))
-})
-
-// 返回 Access Token
-router.get('/token', (req, res) => {
-  weutils.getAccessToken()
-    .then(data => {
-      // 发送 Access Token 到客户端
-      res.send(data)
-      // 缓存操作
-      const token = typeof data === 'string' ? JSON.parse(data) : data
-      const currentTimestamp = Math.floor((new Date()).getTime() / 1000)
-      if(token.source !== 'from_cache') {
-        console.log('写入新的 Access Token 到缓存', token.access_token)
-        cache.set('token_value', token.access_token)
-        cache.set('token_expire', token.expires_in)
-        cache.set('token_ts', currentTimestamp)
-        cache.save()
-      }
-    })
+  const { url } = req.query
+  weutils.generateConfig(url)
+    .then(res.send)
     .catch(err => res.send({
       status: 500,
       msg: err.toString()
