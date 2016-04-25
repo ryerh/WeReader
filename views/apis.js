@@ -1,7 +1,4 @@
-const crypto = require('crypto')
 const express = require('express')
-const cache = require('../lib/cache')
-const request = require('../lib/request')
 const weutils = require('../lib/weutils')
 const router = express.Router()
 

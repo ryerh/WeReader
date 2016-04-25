@@ -5,11 +5,13 @@
     "token": "ryerh"
   },
   "accessToken": {
-    "expire": 7200,
-    "timestamp": 1461551238,
-    "value": "hzVj0Lg-UvvvU7mXqljnF9jQgdjCMPs5F8gHwIQSy4RpNHOWc8rCTzF22-UsV2kAAdQYDkCgNjR8P-mJivZbV9JfyWV9Tt2Ko64DT8R5MDpv-zSC3n7Uof-CpaFkSvU3OFSaAAAIZM"
+    "expire": 0,
+    "timestamp": 0,
+    "value": ""
   },
   "jsTicket": {
-    "timestamp": 1461553180
+    "expire": 0,
+    "timestamp": 0,
+    "value": ""
   }
 }
