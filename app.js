@@ -22,6 +22,9 @@ const APP_ROOT = __dirname
 
 const app = express()
 
+// 代理设置
+app.set('trust proxy', 'loopback')
+
 // 视图存放位置和模板引擎
 app.set('views', path.join(APP_ROOT, 'templates'))
 app.set('view engine', 'jade')
