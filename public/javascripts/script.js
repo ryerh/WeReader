@@ -35,12 +35,16 @@ wx.error(function (err) {
 $(function () {
   $('#scan-code').on('click', function () {
     wx.scanQRCode({
-      needResult: 0,
-      scanType: ['qrCode', 'barCode'],
+      needResult: 1,
+      scanType: ['barCode'],
       success: function (res) {
-        var result = res.resultStr
-        console.log(result)
+        var result = res.resultStr.split(',').pop()
+        alert(result)
+        $.get('api/book/' + result, function (data) {
+          console.log(data)
+        })
       }
     })
   })
+
 })

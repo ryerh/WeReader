@@ -1,6 +1,8 @@
 const express = require('express')
+const json    = require('../lib/json')
+const request = require('../lib/request')
 const weutils = require('../lib/weutils')
-const router = express.Router()
+const router  = express.Router()
 
 // echo 测试服务
 router.get('/echo', (req, res) => {
@@ -41,6 +43,12 @@ router.get('/config', (req, res) => {
       status: 500,
       msg: err.toString()
     }))
+})
+
+router.get('/book/:isbn', (req, res) => {
+  const { isbn } = req.params
+  request.get(`https://api.douban.com/v2/book/isbn/${isbn}`)
+    .then(data => res.send(json.parse(data)))
 })
 
 module.exports = router
