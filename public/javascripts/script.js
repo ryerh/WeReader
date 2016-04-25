@@ -40,8 +40,10 @@ $(function () {
       success: function (res) {
         var result = res.resultStr.split(',').pop()
         alert(result)
-        $.get('api/book/' + result, function (data) {
-          console.log(data)
+        $.get('api/book/' + result, function (book) {
+          $('#book-title').text(book.title)
+          $('#book-img').attr('src', book.images.large)
+          $('#book-summary').text(book.summary)
         })
       }
     })
