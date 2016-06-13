@@ -1,12 +1,16 @@
 const express = require('express')
-const json    = require('../lib/json')
-const request = require('../lib/request')
+const fetch = require('isomorphic-fetch')
+const json = require('../lib/json')
 const weutils = require('../lib/weutils')
-const router  = express.Router()
+const router = express.Router()
 
 // echo 测试服务
 router.get('/echo', (req, res) => {
-  res.send(req.query)
+  res.send({
+    query: req.query,
+    params: req.params,
+    body: req.body
+  })
 })
 
 // 进行微信 auth 认证
@@ -19,10 +23,7 @@ router.get('/auth', (req, res) => {
     return res.send('user not accepted!')
   }
 
-  res.send(`
-    <p>code => ${code}</p>
-    <p>state => ${state}</p>
-  `)
+  res.send({ code, state })
 })
 
 router.get('/signature', (req, res) => {
@@ -45,11 +46,12 @@ router.get('/config', (req, res) => {
     }))
 })
 
+// 豆瓣图书代理
 router.get('/book/:isbn', (req, res) => {
   const { isbn } = req.params
-  request.get(`https://api.douban.com/v2/book/isbn/${isbn}`)
-    .then(data => {
-      const book = json.parse(data)
+  fetch(`https://api.douban.com/v2/book/isbn/${isbn}`)
+    .then(res => res.json())
+    .then(book => {
       console.log('获取书籍', book)
       book.title = book.title || `Book not found (${isbn})`
       res.send(book)

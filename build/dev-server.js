@@ -12,9 +12,10 @@ const webpackConfig   = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
 
+const app = express()
+
 // 路由
-// const apis            = require('./views/apis')
-// const site            = require('./views/site')
+const apis = require('../src/apis')
 
 // default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port
@@ -22,7 +23,19 @@ const port = process.env.PORT || config.dev.port
 // https://github.com/chimurai/http-proxy-middleware
 const proxyTable = config.dev.proxyTable
 
-const app = express()
+// 把收藏夹图标放在 /public 目录后注释掉下面这一行
+//app.use(favicon(path.join(APP_ROOT, 'public', 'favicon.ico')))
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+
+// 路由
+app.use('/api', apis)
+
+// 代理设置
+app.set('trust proxy', 'loopback')
+
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -44,7 +57,7 @@ compiler.plugin('compilation', function (compilation) {
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
-  let options = proxyTable[context]
+  var options = proxyTable[context]
   if (typeof options === 'string') {
     options = { target: options }
   }
@@ -65,48 +78,21 @@ app.use(hotMiddleware)
 const staticPath = path.posix.join(config.build.assetsPublicPath, config.build.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-// 把收藏夹图标放在 /public 目录后注释掉下面这一行
-//app.use(favicon(path.join(APP_ROOT, 'public', 'favicon.ico')))
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
-
-// 路由
-// app.use('/', site)
-// app.use('/api', apis)
-
-// 代理设置
-app.set('trust proxy', 'loopback')
-
 // catch 404 and forward to error handler
-// app.use((req, res, next) => {
-//   const err = new Error('Not Found')
-//   err.status = 404
-//   next(err)
-// })
+app.use((req, res, next) => {
+  const err = new Error('Not Found')
+  err.status = 404
+  next(err)
+})
 
-// 开发环境错误回调
-// 输出错误调用栈
-// if (app.get('env') === 'development') {
-//   app.use((err, req, res, next) => {
-//     res.status(err.status || 500)
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     })
-//   })
-// }
-
-// 生产环境错误回调
-// 用户看不到错误调用栈
-// app.use((err, req, res, next) => {
-//   res.status(err.status || 500)
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   })
-// })
+// 错误输出
+app.use((err, req, res, next) => {
+  res.status(err.status || 500)
+  res.send({
+    message: err.message,
+    error: err
+  })
+})
 
 module.exports = app.listen(port, function (err) {
   if (err) {
